@@ -5,6 +5,16 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaApiSolution", "LambdaApiSolution\LambdaApiSolution.csproj", "{7137D01D-9950-4D3E-8810-DA18A0B40501}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LambdaApiSolution.DockerFunction", "LambdaApiSolution.DockerFunction", "{78E7694F-C460-44A4-9676-AC310A00C92E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{07EA4852-483D-4CFC-877C-BE044766EB79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaApiSolution.DockerFunction", "LambdaApiSolution.DockerFunction\src\LambdaApiSolution.DockerFunction\LambdaApiSolution.DockerFunction.csproj", "{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B96957D2-DBAC-4F92-B7C9-5F403324B54B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaApiSolution.DockerFunction.Tests", "LambdaApiSolution.DockerFunction\test\LambdaApiSolution.DockerFunction.Tests\LambdaApiSolution.DockerFunction.Tests.csproj", "{CD8FCD6C-4A3C-41B0-A49B-589620E39454}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +40,35 @@ Global
 		{7137D01D-9950-4D3E-8810-DA18A0B40501}.Release|x64.Build.0 = Release|Any CPU
 		{7137D01D-9950-4D3E-8810-DA18A0B40501}.Release|x86.ActiveCfg = Release|Any CPU
 		{7137D01D-9950-4D3E-8810-DA18A0B40501}.Release|x86.Build.0 = Release|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Debug|x64.Build.0 = Debug|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Debug|x86.Build.0 = Debug|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Release|x64.ActiveCfg = Release|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Release|x64.Build.0 = Release|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Release|x86.ActiveCfg = Release|Any CPU
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5}.Release|x86.Build.0 = Release|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Debug|x64.Build.0 = Debug|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Debug|x86.Build.0 = Debug|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Release|x64.ActiveCfg = Release|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Release|x64.Build.0 = Release|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07EA4852-483D-4CFC-877C-BE044766EB79} = {78E7694F-C460-44A4-9676-AC310A00C92E}
+		{597344E4-EAF7-4E2C-80B8-3FE6FD7F9FE5} = {07EA4852-483D-4CFC-877C-BE044766EB79}
+		{B96957D2-DBAC-4F92-B7C9-5F403324B54B} = {78E7694F-C460-44A4-9676-AC310A00C92E}
+		{CD8FCD6C-4A3C-41B0-A49B-589620E39454} = {B96957D2-DBAC-4F92-B7C9-5F403324B54B}
 	EndGlobalSection
 EndGlobal
