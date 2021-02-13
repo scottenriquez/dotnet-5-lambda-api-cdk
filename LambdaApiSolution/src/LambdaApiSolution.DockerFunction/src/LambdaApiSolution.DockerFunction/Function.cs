@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -19,9 +15,10 @@ namespace LambdaApiSolution.DockerFunction
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public Casing FunctionHandler(string input, ILambdaContext context)
+        public Casing FunctionHandler(APIGatewayProxyRequest apiGatewayProxyRequest, ILambdaContext context)
         {
-            return new Casing(input?.ToLower(), input?.ToUpper());
+            string input = apiGatewayProxyRequest.Body;
+            return new Casing(input.ToLower(), input.ToUpper());
         }
     }
 
