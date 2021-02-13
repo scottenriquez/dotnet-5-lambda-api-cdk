@@ -1,4 +1,5 @@
 using Amazon.CDK;
+using Amazon.CDK.AWS.Lambda;
 
 namespace LambdaApiSolution
 {
@@ -6,7 +7,12 @@ namespace LambdaApiSolution
     {
         internal LambdaApiSolutionStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
         {
-            // The code that defines your stack goes here
+            DockerImageCode dockerImageCode = DockerImageCode.FromImageAsset("src/LambdaApiSolution.DockerFunction/src/LambdaApiSolution.DockerFunction");
+            DockerImageFunction dockerImageFunction = new DockerImageFunction(this, "LambdaFunction", new DockerImageFunctionProps()
+            {
+                Code = dockerImageCode,
+                Description = ".NET 5 Docker Lambda function"
+            });
         }
     }
 }

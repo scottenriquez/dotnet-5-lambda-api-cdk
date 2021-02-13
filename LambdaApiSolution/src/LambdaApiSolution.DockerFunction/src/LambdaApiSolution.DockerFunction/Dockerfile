@@ -1,13 +1,22 @@
 FROM public.ecr.aws/lambda/dotnet:5.0
+FROM mcr.microsoft.com/dotnet/sdk:5.0 as build-image
 
-WORKDIR /var/task
+ARG FUNCTION_DIR="/build"
+ARG CONFIGURATION="release"
+ENV PATH="/root/.dotnet/tools:${PATH}"
 
-# This COPY command copies the .NET Lambda project's build artifacts from the host machine into the image. 
-# The source of the COPY should match where the .NET Lambda project publishes its build artifacts. If the Lambda function is being built 
-# with the AWS .NET Lambda Tooling, the `--docker-host-build-output-dir` switch controls where the .NET Lambda project
-# will be built. The .NET Lambda project templates default to having `--docker-host-build-output-dir`
-# set in the aws-lambda-tools-defaults.json file to "bin/Release/net5.0/linux-x64/publish".
-#
-# Alternatively Docker multi-stage build could be used to build the .NET Lambda project inside the image.
-# For more information on this approach checkout the project's README.md file.
-COPY "bin/Release/net5.0/linux-x64/publish"  .
+RUN apt-get update && apt-get -y install zip
+
+RUN mkdir $FUNCTION_DIR
+WORKDIR $FUNCTION_DIR
+COPY Function.cs LambdaApiSolution.DockerFunction.csproj aws-lambda-tools-defaults.json $FUNCTION_DIR/
+RUN dotnet tool install -g Amazon.Lambda.Tools
+
+RUN mkdir -p build_artifacts
+RUN if [ "$CONFIGURATION" = "debug" ]; then dotnet lambda package --configuration Debug --package-type zip; else dotnet lambda package --configuration Release --package-type zip; fi
+RUN if [ "$CONFIGURATION" = "debug" ]; then cp -r /build/bin/Debug/net5.0/publish/* /build/build_artifacts; else cp -r /build/bin/Release/net5.0/publish/* /build/build_artifacts; fi
+
+FROM public.ecr.aws/lambda/dotnet:5.0
+
+COPY --from=build-image /build/build_artifacts/ /var/task/
+CMD ["LambdaApiSolution.DockerFunction::LambdaApiSolution.DockerFunction.Function::FunctionHandler"]
