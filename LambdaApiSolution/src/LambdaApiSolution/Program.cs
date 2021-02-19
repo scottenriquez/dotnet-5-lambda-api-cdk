@@ -7,8 +7,7 @@ namespace LambdaApiSolution
         public static void Main(string[] args)
         {
             App app = new App();
-            //new LambdaApiSolutionStack(app, "LambdaApiSolutionStack");
-            new PipelineStack(app, "LambdaApiSolutionPipelineStack");
+            PipelineStack pipelineStack = new PipelineStack(app, "LambdaApiSolutionPipelineStack");
             app.Synth();
         }
     }

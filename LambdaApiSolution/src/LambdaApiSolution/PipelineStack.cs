@@ -1,4 +1,5 @@
 using Amazon.CDK;
+using Amazon.CDK.AWS.CodeBuild;
 using Amazon.CDK.AWS.CodePipeline;
 using Amazon.CDK.AWS.CodePipeline.Actions;
 using Amazon.CDK.Pipelines;
@@ -27,6 +28,12 @@ namespace LambdaApiSolution
 				}),
 				SynthAction = new SimpleSynthAction(new SimpleSynthActionProps()
 				{
+					Environment = new BuildEnvironment
+					{
+						// required for .NET 5
+						// https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html
+						BuildImage = LinuxBuildImage.STANDARD_5_0
+					},
 					SourceArtifact = sourceArtifact,
 					CloudAssemblyArtifact = cloudAssemblyArtifact,
 					InstallCommands = new [] { "npm install -g aws-cdk" },
