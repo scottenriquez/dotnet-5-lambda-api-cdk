@@ -36,10 +36,10 @@ namespace LambdaApiSolution
 					},
 					SourceArtifact = sourceArtifact,
 					CloudAssemblyArtifact = cloudAssemblyArtifact,
+					Subdirectory = "LambdaApiSolution",
 					InstallCommands = new [] { "npm install -g aws-cdk" },
-					BuildCommands = new [] { "dotnet build LambdaApiSolution/src/LambdaApiSolution.sln" },
-					// run synth command from correct subfolder
-					SynthCommand = "cd LambdaApiSolution && cdk synth"
+					BuildCommands = new [] { "dotnet build src/LambdaApiSolution.sln" },
+					SynthCommand = "cdk synth"
 				})
 			});
 		}
