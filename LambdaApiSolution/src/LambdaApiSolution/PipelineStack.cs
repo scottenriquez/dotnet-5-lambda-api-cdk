@@ -22,6 +22,7 @@ namespace LambdaApiSolution
 					OauthToken = SecretValue.SecretsManager(Constants.GitHubTokenSecretsManagerId),
 					Owner = Constants.Owner,
 					Repo = Constants.RepositoryName,
+					Branch = Constants.Branch,
 					Trigger = GitHubTrigger.POLL
 				}),
 				SynthAction = new SimpleSynthAction(new SimpleSynthActionProps()
