@@ -12,7 +12,12 @@
     <PackageReference Include="Amazon.CDK" Version="1.90.0" />
     <PackageReference Include="Amazon.CDK.AWS.APIGatewayv2" Version="1.90.0" />
     <PackageReference Include="Amazon.CDK.AWS.APIGatewayv2.Integrations" Version="1.90.0" />
+    <PackageReference Include="Amazon.CDK.AWS.CodeBuild" Version="1.90.0" />
+    <PackageReference Include="Amazon.CDK.AWS.CodeDeploy" Version="1.90.0" />
+    <PackageReference Include="Amazon.CDK.AWS.CodePipeline" Version="1.90.0" />
+    <PackageReference Include="Amazon.CDK.AWS.CodePipeline.Actions" Version="1.90.0" />
     <PackageReference Include="Amazon.CDK.AWS.Lambda" Version="1.90.0" />
+    <PackageReference Include="Amazon.CDK.Pipelines" Version="1.90.0" />
 
     <!-- jsii Roslyn analyzers (un-comment to obtain compile-time checks for missing required props
     <PackageReference Include="Amazon.Jsii.Analyzers" Version="*" PrivateAssets="all" />
