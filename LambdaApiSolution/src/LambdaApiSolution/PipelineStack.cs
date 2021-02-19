@@ -43,10 +43,6 @@ namespace LambdaApiSolution
 				})
 			});
 			CdkStage developmentStage = pipeline.AddApplicationStage(new SolutionStage(this, "Development"));
-			developmentStage.AddManualApprovalAction(new AddManualApprovalOptions()
-			{
-				ActionName = "PromoteToTest"
-			});
 			CdkStage testStage = pipeline.AddApplicationStage(new SolutionStage(this, "Test"));
 			testStage.AddManualApprovalAction(new AddManualApprovalOptions()
 			{
