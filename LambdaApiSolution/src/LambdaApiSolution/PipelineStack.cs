@@ -42,9 +42,17 @@ namespace LambdaApiSolution
 					SynthCommand = "cdk synth"
 				})
 			});
-			pipeline.AddApplicationStage(new SolutionStage(this, "Development"));
-			pipeline.AddApplicationStage(new SolutionStage(this, "Test"));
-			pipeline.AddApplicationStage(new SolutionStage(this, "Production"));
+			CdkStage developmentStage = pipeline.AddApplicationStage(new SolutionStage(this, "Development"));
+			developmentStage.AddManualApprovalAction(new AddManualApprovalOptions()
+			{
+				ActionName = "PromoteToTest"
+			});
+			CdkStage testStage = pipeline.AddApplicationStage(new SolutionStage(this, "Test"));
+			testStage.AddManualApprovalAction(new AddManualApprovalOptions()
+			{
+				ActionName = "PromoteToProduction"
+			});
+			CdkStage productionStage = pipeline.AddApplicationStage(new SolutionStage(this, "Production"));
 		}
 	}
 }
