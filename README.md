@@ -210,47 +210,46 @@ using Amazon.CDK.Pipelines;
 
 namespace LambdaApiSolution
 {
-	public class PipelineStack : Stack
-	{
-		internal PipelineStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
-		{
-			Artifact_ sourceArtifact = new Artifact_();
-			Artifact_ cloudAssemblyArtifact = new Artifact_();
-			CdkPipeline pipeline = new CdkPipeline(this, "LambdaApiSolutionPipeline", new CdkPipelineProps()
-			{
-				CloudAssemblyArtifact = cloudAssemblyArtifact,
-				PipelineName = "LambdaApiSolutionPipeline",
-				SourceAction = new GitHubSourceAction(new GitHubSourceActionProps()
-				{
-					ActionName = "GitHubSource",
-					Output = sourceArtifact,
-					OauthToken = SecretValue.SecretsManager(Constants.GitHubTokenSecretsManagerId),
-					// these values are in Constants.cs instead of being hardcoded
-					Owner = Constants.Owner,
-					Repo = Constants.RepositoryName,
-					Branch = Constants.Branch,
-					Trigger = GitHubTrigger.POLL
-				}),
-				SynthAction = new SimpleSynthAction(new SimpleSynthActionProps()
-				{
-					Environment = new BuildEnvironment
-					{
-						// required for .NET 5
-						// https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html
-						BuildImage = LinuxBuildImage.STANDARD_5_0
-					},
-					SourceArtifact = sourceArtifact,
-					CloudAssemblyArtifact = cloudAssemblyArtifact,
-					// navigates to the proper subdirectory to simplify other commands
-					Subdirectory = "LambdaApiSolution",
-					InstallCommands = new [] { "npm install -g aws-cdk" },
-					BuildCommands = new [] { "dotnet build src/LambdaApiSolution.sln" },
-					SynthCommand = "cdk synth"
-				})
-			});
-		}
-	}
+    public class PipelineStack : Stack
+    {
+        internal PipelineStack(Construct scope, string id, IStackProps props = null) : base(scope, id, props)
+        {
+            Artifact_ sourceArtifact = new Artifact_();
+            Artifact_ cloudAssemblyArtifact = new Artifact_();
+            CdkPipeline pipeline = new CdkPipeline(this, "LambdaApiSolutionPipeline", new CdkPipelineProps()
+            {
+                CloudAssemblyArtifact = cloudAssemblyArtifact,
+                PipelineName = "LambdaApiSolutionPipeline",
+                SourceAction = new GitHubSourceAction(new GitHubSourceActionProps()
+                {
+                    ActionName = "GitHubSource",
+                    Output = sourceArtifact,
+                    OauthToken = SecretValue.SecretsManager(Constants.GitHubTokenSecretsManagerId),
+                    Owner = Constants.Owner,
+                    Repo = Constants.RepositoryName,
+                    Branch = Constants.Branch,
+                    Trigger = GitHubTrigger.POLL
+                }),
+                SynthAction = new SimpleSynthAction(new SimpleSynthActionProps()
+                {
+                    Environment = new BuildEnvironment
+                    {
+                        // required for .NET 5
+                        // https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html
+                        BuildImage = LinuxBuildImage.STANDARD_5_0
+                    },
+                    SourceArtifact = sourceArtifact,
+                    CloudAssemblyArtifact = cloudAssemblyArtifact,
+                    Subdirectory = "LambdaApiSolution",
+                    InstallCommands = new[] {"npm install -g aws-cdk"},
+                    BuildCommands = new[] {"dotnet build src/LambdaApiSolution.sln"},
+                    SynthCommand = "cdk synth"
+                })
+            });
+        }
+    }
 }
+
 ```
 
 Remove the following line from `Program.cs` since the pipeline will deploy the API from now on:
@@ -277,13 +276,13 @@ using Construct = Constructs.Construct;
 
 namespace LambdaApiSolution
 {
-	public class SolutionStage : Stage
-	{
-		public SolutionStage(Construct scope, string id, IStageProps props = null) : base(scope, id, props)
-		{
-			LambdaApiSolutionStack lambdaApiSolutionStack = new LambdaApiSolutionStack(this, "Solution");
-		}
-	}
+   public class SolutionStage : Stage
+   {
+      public SolutionStage(Construct scope, string id, IStageProps props = null) : base(scope, id, props)
+      {
+         LambdaApiSolutionStack lambdaApiSolutionStack = new LambdaApiSolutionStack(this, "Solution");
+      }
+   }
 }
 ```
 
