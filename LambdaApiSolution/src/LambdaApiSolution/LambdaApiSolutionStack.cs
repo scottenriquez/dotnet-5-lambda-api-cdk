@@ -1,3 +1,4 @@
+using System;
 using Amazon.CDK;
 using Amazon.CDK.AWS.APIGatewayv2;
 using Amazon.CDK.AWS.APIGatewayv2.Integrations;
@@ -37,9 +38,10 @@ namespace LambdaApiSolution
                 Integration = lambdaProxyIntegration,
                 Methods = new [] { HttpMethod.POST }
             });
+            string guid = Guid.NewGuid().ToString();
             CfnOutput apiUrl = new CfnOutput(this, "APIGatewayURLOutput", new CfnOutputProps()
             {
-                ExportName = "APIGatewayEndpointURL",
+                ExportName = $"APIGatewayEndpointURL-{guid}",
                 Value = httpApi.ApiEndpoint
             });
         }
