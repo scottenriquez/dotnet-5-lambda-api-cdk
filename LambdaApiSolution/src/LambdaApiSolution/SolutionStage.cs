@@ -1,5 +1,4 @@
 using Amazon.CDK;
-using Amazon.JSII.Runtime.Deputy;
 using Construct = Constructs.Construct;
 
 namespace LambdaApiSolution
