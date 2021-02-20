@@ -188,8 +188,6 @@ After successfully deploying the changes, the function can be tested in two ways
 ## Adding CI/CD Using CDK Pipelines
 For this example, the source code resides in GitHub as opposed to CodeCommit. To grant the CI/CD pipeline access to the repository, a personal access token with `repo` permissions must be created via GitHub and stored in Secrets Manager as a plaintext format object. Note that for this codebase, I've named my secret `GitHub-Token`.
 
-![GitHub Personal Access Token](./github-personal-access-token.png)
-
 Next, add the following packages to the CDK project:
 ```xml
 <PackageReference Include="Amazon.CDK.AWS.CodeBuild" Version="1.90.0" />
