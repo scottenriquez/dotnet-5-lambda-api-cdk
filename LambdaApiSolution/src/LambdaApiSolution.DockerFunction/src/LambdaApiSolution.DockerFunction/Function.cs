@@ -6,21 +6,20 @@ using Amazon.Lambda.Core;
 
 namespace LambdaApiSolution.DockerFunction
 {
-    public class Function
-    {
-        
-        /// <summary>
-        /// A simple function that takes a string and returns both the upper and lower case version of the string.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public Casing FunctionHandler(APIGatewayProxyRequest apiGatewayProxyRequest, ILambdaContext context)
-        {
-            string input = apiGatewayProxyRequest.Body;
-            return new Casing(input.ToLower(), input.ToUpper());
-        }
-    }
+	public class Function
+	{
+		/// <summary>
+		/// A simple function that takes a string and returns both the upper and lower case version of the string.
+		/// </summary>
+		/// <param name="input"></param>
+		/// <param name="context"></param>
+		/// <returns></returns>
+		public Casing FunctionHandler(APIGatewayProxyRequest apiGatewayProxyRequest, ILambdaContext context)
+		{
+			string input = apiGatewayProxyRequest.Body;
+			return new Casing(input.ToLower(), input.ToUpper());
+		}
+	}
 
-    public record Casing(string Lower, string Upper);
+	public record Casing(string Lower, string Upper);
 }
